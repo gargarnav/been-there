@@ -161,25 +161,27 @@
   </footer>
 
   <script>
-    const toggleBtn = document.getElementById('toggle-dark');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
-    });
-
-    const posts = document.querySelectorAll('.post');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtn = document.getElementById('toggle-dark');
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
       });
-    }, {
-      threshold: 0.1
-    });
 
-    posts.forEach(post => observer.observe(post));
+      const posts = document.querySelectorAll('.post');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      posts.forEach(post => observer.observe(post));
+    });
   </script>
 </body>
 </html>
